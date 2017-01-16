@@ -2,7 +2,7 @@
   "name": "jest-extensions",
   "version": "0.1.0",
   "description": "Jest extensions",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "Ricardo Stuven <rstuven@gmail.com>",
   "license": "BSD-2-Clause",
   "jest": {
