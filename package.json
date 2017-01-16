@@ -1,0 +1,38 @@
+{
+  "name": "jest-extensions",
+  "version": "0.1.0",
+  "description": "Jest extensions",
+  "main": "index.js",
+  "author": "Ricardo Stuven <rstuven@gmail.com>",
+  "license": "BSD-2-Clause",
+  "jest": {
+    "testRegex": "/__tests__/.*\\.test\\.jsx?$",
+    "verbose": true,
+    "collectCoverage": false,
+    "coverageReporters": [
+      "text",
+      "html"
+    ]
+  },
+  "scripts": {
+    "babel": "babel -d ./lib ./src --ignore '**/*.test.js'",
+    "build": "npm run clean && npm run flow && npm run babel",
+    "clean": "rm -rf lib && mkdir lib",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "test": "jest",
+    "test:watch": "jest --watch --notify",
+    "prepublish": "npm test && npm run build"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "flow-bin": "^0.37.4",
+    "jest": "^18.1.0"
+  },
+  "peerDependencies": {
+    "jest": "^18.1.0"
+  }
+}

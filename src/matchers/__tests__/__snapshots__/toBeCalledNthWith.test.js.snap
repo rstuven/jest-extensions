@@ -1,0 +1,8 @@
+exports[`toBeCalledNthWith pass: false 1`] = `
+"[2mexpect([22m[31mjest.fn()[39m[2m)toBeCalledNthWith([22m[32mexpected[39m[2m)[22m
+
+Expected mock function to have been called with:
+  [32m[\"call0\", \"callX\"][39m
+But it was called with:
+  [31m[\"call2\", \"callB\"][39m"
+`;
