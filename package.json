@@ -8,7 +8,7 @@
   "license": "BSD-2-Clause",
   "jest": {
     "testRegex": "/__tests__/.*\\.test\\.jsx?$",
-    "verbose": true,
+    "verbose": false,
     "collectCoverage": false,
     "coverageReporters": [
       "text",

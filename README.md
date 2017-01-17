@@ -1,4 +1,4 @@
-# () Jest extensions
+# Jest extensions
 
 ## Usage
 
@@ -40,3 +40,59 @@ expect(mockedFunction.mock.calls[index][1]).toEqual(arg2)
 * `expect.or(matcher1, matcher2, ...)` - logical OR operator over many matchers.
 * `expect.toContain(<value>)` - checks that the value is contained in the `actual` collection.
 * `expect.toHaveLength(<number>)` - checks that the `actual` has a .length property and it is set to a certain numeric value.
+
+## Utilities
+
+* `mockModuleClassInstance` gets a new class instance with all methods mocked, except those specified in arguments. For example:
+
+`./src/MyClass.js`:
+```js
+export default class MyClass {
+  
+  now() {
+    return new Date
+  }
+
+  async getFromApi(date) {
+    // asynchronously request external API
+  }
+
+  async getNowData() {
+    return await this.getFromApi(this.now())
+  }
+
+}
+```
+
+`./src/__tests__/MyClass.test.js`:
+```js
+import { mockModuleClassInstance } from 'jest-extensions'
+
+function mockMyClassInstance(...unmockedMethods) {
+  return mockModuleClassInstance(__dirname + '/../MyClass.js', ...unmockedMethods)
+}
+
+
+describe('MyClass', () => {
+
+  describe('getNowData', () => {
+
+    it('succeeds', async () => {
+      const sut = mockMyClassInstance('getNowData')
+
+      // All other methods are already mocked.
+      // Even if mock implementations aren't defined,
+      // no accidental side effect evaluations or state changes can occur.
+      sut.now.mockImplementationOnce(() => new Date('2017-01-16'))
+      sut.getFromApi.mockImplementation(() => ({ data: 'value' }))
+
+      const result = await sut.getNowData()
+
+      expect(sut.getFromApi).toBeCalledWith(new Date('2017-01-16'))
+      expect(result).toEqual({ data: 'value' })
+    })
+
+  })
+
+})
+```
