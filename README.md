@@ -43,7 +43,7 @@ expect(mockedFunction.mock.calls[index][1]).toEqual(arg2)
 
 ## Utilities
 
-* `mockModuleClassInstance` gets a new class instance with all methods mocked, except those specified in arguments. For example:
+* `mockModuleClass` gets a new class with all methods mocked, except those specified in arguments. For example:
 
 `./src/MyClass.js`:
 ```js
@@ -66,19 +66,18 @@ export default class MyClass {
 
 `./src/__tests__/MyClass.test.js`:
 ```js
-import { mockModuleClassInstance } from 'jest-extensions'
+import { mockModuleClass } from 'jest-extensions'
 
-function mockMyClassInstance(...unmockedMethods) {
-  return mockModuleClassInstance(__dirname + '/../MyClass.js', ...unmockedMethods)
+function mockMyClass(...unmockedMethods) {
+  return mockModuleClass(__dirname + '/../MyClass.js', ...unmockedMethods)
 }
-
 
 describe('MyClass', () => {
 
   describe('getNowData', () => {
 
     it('succeeds', async () => {
-      const sut = mockMyClassInstance('getNowData')
+      const sut = new mockMyClass('getNowData')()
 
       // All other methods are already mocked.
       // Even if mock implementations aren't defined,

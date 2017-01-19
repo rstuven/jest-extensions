@@ -1,5 +1,9 @@
 module.exports = class NotDefaultClass {
 
+  constructor(a, b, c) {
+    console.log(this.now(a, b, c))
+  }
+
   now() {
     return new Date
   }
