@@ -1,7 +1,11 @@
 module.exports = class NotDefaultClass {
 
   constructor(a, b, c) {
-    console.log(this.now(a, b, c))
+    this.init(a, b, c)
+  }
+
+  init() {
+    return new Date
   }
 
   now() {
