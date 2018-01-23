@@ -12,8 +12,8 @@ test('success', () => {
   mock('arg1', 'arg2')
   mock('arg3', 'arg4')
   expect(mock).toBeCalledTimes(2)
-  expcet(mock).toBeCalledNthWith(0, 'arg1', 'arg2')
-  expcet(mock).toBeCalledNthWith(1, 'arg3', 'arg4')
+  expect(mock).toBeCalledNthWith(0, 'arg1', 'arg2')
+  expect(mock).toBeCalledNthWith(1, 'arg3', 'arg4')
 })
 
 test('fail', () => {
